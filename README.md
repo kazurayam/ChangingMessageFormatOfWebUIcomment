@@ -4,7 +4,8 @@ Changing Message Format of WebUI.comment()
 ## What is this?
 
 This is a small [Katalon Studio](https://www.katalon.com/) project for demostration purpose.
-You can down load the zip file from [Releases]() page, unzip it and open with your Katalon Studio.
+You can down load the zip file from [Releases](https://github.com/kazurayam/ChangingMessageFormatOfWebUIcomment/releases) page,
+unzip it and open with your Katalon Studio.
 
 This project was developed using Katalon Studio version 5.10.1
 
