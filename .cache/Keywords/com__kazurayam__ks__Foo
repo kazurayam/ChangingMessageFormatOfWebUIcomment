@@ -1,0 +1,10 @@
+{
+  "keywordFileContentHash": "8CAD84CC9EC977A658141C8FDD484FC2",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.ks.Foo",
+      "keywordMethods": []
+    }
+  ],
+  "javadocParsed": true
+}

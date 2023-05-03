@@ -17,6 +17,7 @@ public class CustomLoggerFactory {
 	private static Logger logger = LoggerFactory.getLogger(CustomLoggerFactory.class);
 
 	public static final CLASSNAME_COMMENT_KEYWORD = 'com.kms.katalon.core.keyword.builtin.CommentKeyword'
+	public static final PATTERN                   = /com\.kms\.katalon\.core\.keyword\.builtin\.CommentKeyword/
 
 	/**
 	 * This keyword modifies the Logback config used by Katalon Studio on the fly as if it were
@@ -38,17 +39,18 @@ public class CustomLoggerFactory {
 	@Keyword
 	public static void customizeCommentKeyword4MsgOnly2Console() {
 		LoggerFactory.metaClass.static.getLogger = { String name ->
-			if (name =~ /com\.kms\.katalon\.core\.keyword\.builtin\.CommentKeyword/) {
-				return getCommentKeywordLogger4MsgOnly2Console()
+			if (name =~ PATTERN) {
+				return getCommentKeywordLogger4msgOnly2Console()
 			} else {
 				ILoggerFactory iLoggerFactory = LoggerFactory.getILoggerFactory()
 				return iLoggerFactory.getLogger(name);
 			}
 		}
-		// the following line is necessary to acknowledge the LoggerFactory of the custom Logger instance for the WebUI.comment keyword
-		org.slf4j.Logger log = LoggerFactory.getLogger("com.kms.katalon.core.keyword.builtin.CommentKeyword")
+		// the following line is required
+		org.slf4j.Logger log = LoggerFactory.getLogger(CLASSNAME_COMMENT_KEYWORD)
 	}
-	private static Logger getCommentKeywordLogger4MsgOnly2Console() {
+
+	private static Logger getCommentKeywordLogger4msgOnly2Console() {
 		LoggerContext logCtx = ((ch.qos.logback.classic.Logger)logger).getLoggerContext()
 		//
 		PatternLayoutEncoder msgOnlyEncoder = new PatternLayoutEncoder()
@@ -97,8 +99,10 @@ public class CustomLoggerFactory {
 	 */
 	@Keyword
 	public static void customizeCommentKeyword4levelAndMsg2File(File output) {
+		Objects.requireNonNull(output, "output must not be null")
+		ensureParentDirs(output)
 		LoggerFactory.metaClass.static.getLogger = { String name ->
-			if (name =~ /com\.kms\.katalon\.core\.keyword\.builtin\.CommentKeyword/) {
+			if (name =~ PATTERN) {
 				return getCommentKeywordLogger4levelAndMsg2File(output)
 			} else {
 				ILoggerFactory iLoggerFactory = LoggerFactory.getILoggerFactory()
@@ -106,8 +110,9 @@ public class CustomLoggerFactory {
 			}
 		}
 		// the following line is necessary to acknowledge the LoggerFactory of the custom Logger instance for the WebUI.comment keyword
-		org.slf4j.Logger log = LoggerFactory.getLogger("com.kms.katalon.core.keyword.builtin.CommentKeyword")
+		org.slf4j.Logger log = LoggerFactory.getLogger(CLASSNAME_COMMENT_KEYWORD)
 	}
+
 	private static Logger getCommentKeywordLogger4levelAndMsg2File(File output) {
 		LoggerContext logCtx = ((ch.qos.logback.classic.Logger)logger).getLoggerContext()
 		//
@@ -135,5 +140,16 @@ public class CustomLoggerFactory {
 		logger.addAppender(levelAndMsg2FileAppender)
 		//
 		return logger
+	}
+
+
+	private static void ensureParentDirs(File file) {
+		File parentDir = file.getParentFile()
+		if ( !parentDir.exists() ) {
+			boolean b = parentDir.mkdirs()
+			if ( ! b ) {
+				throw new IOException("failed to create ${parentDir.toString()}")
+			}
+		}
 	}
 }

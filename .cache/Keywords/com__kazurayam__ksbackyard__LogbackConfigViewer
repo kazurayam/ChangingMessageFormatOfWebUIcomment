@@ -1,0 +1,21 @@
+{
+  "keywordFileContentHash": "093FA8AB6DF36D37DE55145D5A3B3474",
+  "keywordClasses": [
+    {
+      "name": "com.kazurayam.ksbackyard.LogbackConfigViewer",
+      "keywordMethods": [
+        {
+          "name": "showLoggerContext",
+          "parameters": [],
+          "javadoc": ""
+        },
+        {
+          "name": "showMainWatchURL",
+          "parameters": [],
+          "javadoc": ""
+        }
+      ]
+    }
+  ],
+  "javadocParsed": true
+}

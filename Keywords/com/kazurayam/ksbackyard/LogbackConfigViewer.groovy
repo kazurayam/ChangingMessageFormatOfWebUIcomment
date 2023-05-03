@@ -18,14 +18,12 @@ public class LogbackConfigViewer {
 		LoggerContext lc = ((ch.qos.logback.classic.Logger)logger).getLoggerContext();
 		StatusPrinter.print(lc)
 	}
-	
+
 	@Keyword
 	static void showMainWatchURL() throws Exception {
 		LoggerContext loggerContext = ((ch.qos.logback.classic.Logger)logger).getLoggerContext();
 		URL mainURL = ConfigurationWatchListUtil.getMainWatchURL(loggerContext);
 		System.out.println("MainWatchURL: ${mainURL}");
 	}
-	
-	
 }
 
