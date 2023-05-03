@@ -1,10 +1,10 @@
 {
-  "keywordFileContentHash": "7DAA7B5B7ED43F3850D484D1F6F4954B",
+  "keywordFileContentHash": "3B67B8A8C1C763BC1196584D7876F8D3",
   "keywordClasses": [
     {
       "name": "com.kazurayam.ks.LoggerContextConfigurator",
       "keywordMethods": []
     }
   ],
-  "javadocParsed": false
+  "javadocParsed": true
 }
